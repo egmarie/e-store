@@ -1,0 +1,22 @@
+MVT or Model - View - Template framework
+DTL: Django Template Language
+
+Modularization
+    each app should be self-contained
+    delete folder of app without ruining the project
+    
+Migrations Files (something to do with databases())
+
+ORM: Object Relational Model
+
+Class models that will be transformed by migrations into database tables
+    Class: data tables
+    Class attribute: column
+    ORM>>>Classes > makeMigrations > Migrate > Database
+
+CRUD: minimum ops every system should support (create, retrieve, update, delete)
+
+ERROR 403: Forbidden Action (CSRF verification failed)
+CROSS SITE REQUEST FORGERY
+
+a foreign key: linking between two Django tables

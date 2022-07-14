@@ -1,0 +1,101 @@
+
+  
+  a:link, a:visited, a:hover, a:active  {
+    text-decoration: none;
+  }
+  
+  #averagePlayers {
+   max-width: 500px; 
+  }
+  
+  #firstLine {
+    width: 60%;
+    color: #B41810;
+    height: 3px;
+    background: #B41810;
+    border-width: 0;
+    
+  }
+  
+  #secondLine {
+    width: 30px;
+    color: #B41810;
+    height: 15px;
+    background: #B41810;
+    border-width: 0;
+    
+  }
+  
+  #thirdLine {
+    margin: 0px;
+    width: 60%;
+    color: #B41810;
+    height: 100%;
+    background: #B41810;
+    border-width: 0;
+    
+  }
+  
+  .activeDashPage {
+    border-bottom: 3px solid #B41810;
+  }
+  
+  .activeDashPage a {
+    color: #B41810;
+  }
+  
+  
+  .activeNavPage {
+    border-bottom: 3px solid white;
+  }
+  
+  .activeNavPage a {
+    color: white;
+  }
+  
+  #NavContainer a {
+    color: #D3D3D3;
+  }
+  
+  #dashToggle div a {
+    color: #939393;
+  }
+  
+  
+  .activeLine {
+    margin: 0px 0px;
+    color: #B41810;
+    height: 3px;
+    background: #B41810;
+    border-width: 0;
+    font-weight: 500;
+  }
+
+
+  #chart4 {
+    width: auto;
+    height: 400px
+  }
+/*
+  .season-top-two-charts {
+    width: 47%;
+    height: auto;
+    padding: 1.5%;
+    
+  } */
+
+#averagePlayers {
+    width: 100%;
+    height: auto;
+  }
+
+  #chart_season_engagement_line, #chart_season_top_three_games, #chart_season_players_per_event {
+    width: 100%;
+    height: auto;
+
+  }
+  .season_chart_row {
+    width: 46%;
+    height: auto;
+    margin: 2%;
+  }

@@ -1,0 +1,208 @@
+
+/* pink */
+$pink: #FF7F9D;
+$mdPink: #C46279;
+$dkPink: #811B33;
+
+/* blue */
+$ltBlue: #87BCBF;
+$blue: #1D9FDE;
+$mdBlue: #111688;
+/*$dkBlue: #324755;*/
+$dkBlue: #595959;
+
+$header-font: Montserrat, sans-serif;
+$body-font-family: work-sans, sans-serif;
+
+@mixin for-phone-only {
+  @media (max-width: 400px) { @content; }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: 500px) { @content; }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) { @content; }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) { @content; }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) { @content; }
+}
+
+
+
+
+
+h1 {
+  font-family: $header-font;
+  color: $mdBlue;
+  font-size: 3.3em;
+  letter-spacing: .08em;
+  line-height: 1em;
+  @include for-tablet-landscape-up {    
+    font-size: 3rem;
+}
+}
+h2 {
+  font-family: $header-font;
+  color: $mdBlue;
+  font-size: 2.4em;
+}
+h3 {
+  font-family: $header-font;
+  color: $mdBlue;
+  font-size: 2em;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  
+}
+h4 {
+  font-family: $body-font-family;
+  color: $mdBlue;
+  font-size: 1em;
+  font-weight: 300;
+  letter-spacing: .018em;
+  
+}
+h5 {
+  font-family: $body-font-family;
+  color: $mdPink;
+  font-size: .9em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+h6 {
+  font-family: $body-font-family;
+  color: $mdBlue;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: .05em;
+    @include for-phone-only {    
+      font-size: 1rem;
+}
+}
+p {
+  font-family: $body-font-family;
+  color: $dkBlue;
+  font-size: 1rem;
+  font-weight: 400;
+@include for-tablet-portrait-up()  {    
+  font-size: 1.2rem;
+}
+  @include for-tablet-landscape-up  {    
+    font-size: 1.3rem;
+}
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  background-image: linear-gradient(black,red);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+button {
+  font-size: 1rem;
+  width: 40%;
+  padding:1rem;
+  margin: 1.5rem;
+}
+
+
+/*
+.navlink.active {
+  color: $orange; 
+}
+.navlink {
+  color: $orange; 
+}
+*/
+
+body {
+    margin: 0;
+}
+
+ul.sidescroll {
+  overflow-x: scroll;
+}
+
+.pillDiv {
+  background-image: linear-gradient(130deg, rgba(129, 211, 255, .3), rgba(129, 211, 255, .1), );
+}
+#gradYear {
+  font-size: .8rem;
+}
+.teamDiv {
+  @include for-phone-only() {    
+    width: 300px;
+    height: 220px;
+    }   
+  @include for-tablet-portrait-up() {
+    width: 300px;
+    height: 250px;
+  }
+}
+#contributions {
+  list-style: none;
+}
+.teamLI p {
+  font-size: .6rem;
+}
+.footerLinks {
+  text-decoration: none;
+}
+/*
+a:link - a normal, unvisited link
+a:visited - a link the user has visited
+a:hover - a link when the user mouses over it
+a:active
+*/
+
+#chart2 rect {
+	fill: orange;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+#chart3 {
+  padding: 20px;
+}
+ 
+ 

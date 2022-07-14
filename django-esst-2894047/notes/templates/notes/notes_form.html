@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" class="d-flex flex-column justify-content-start">{% csrf_token %}
+    {{form}}
+
+    <div class="d-flex flex-row justify-content-end align-items-center">
+        <a href="{% url 'notes:notes-list'%}" class="btn btn-secondary m-3">Cancel</a>
+        <button type="submit" class="btn btn-primary my-5 mx-3">Submit</button> 
+</div>
+</form>
+
+{% if form.errors %}
+    <div class="alert alert-danger my-5">
+        {{form.errors.title.as_text}}
+    </div>
+{% endif%}
+
+
+{% endblock %}
