@@ -1,0 +1,71 @@
+[{
+    "prodName": "Clear Springs Dress",
+    "prodID": 9384756575685,
+    "prodPrice": 21.23,
+    "prodSale": true,
+    "prodSalesPercent": 0.05,
+    "prodColors": ["#333333", "#FFFFFF"],
+    "prodType": "Dress",
+    "prodSeason": "Spring"
+},
+{
+    "prodName": "Backyard Shenanigans Shirt",
+    "prodID": 9324738579347494,
+    "prodPrice": 10.94,
+    "prodSale": false,
+    "prodSalesPercent": 0,
+    "prodColors": ["#338373", "#837483"],
+    "prodType": "Shirt",
+    "prodSeason": "Spring"
+},
+{
+    "prodName": "Lakeside Luxury Dress",
+    "prodID": 9390878685,
+    "prodPrice": 15.67,
+    "prodSale": true,
+    "prodSalesPercent": 0.08,
+    "prodColors": ["#333333", "#FFFFFF"],
+    "prodType": "Dress",
+    "prodSeason": "Summer"
+},
+{
+    "prodName": "Summertime Sun Shorts",
+    "prodID": 9387687694888,
+    "prodPrice": 8.29,
+    "prodSale": false,
+    "prodSalesPercent": 0,
+    "prodColors": ["#338373", "#88783"],
+    "prodType": "Shorts",
+    "prodSeason": "Summer"
+},
+{
+    "prodName": "Lakeside Luxury Dress",
+    "prodID": 9390878685,
+    "prodPrice": 15.67,
+    "prodSale": true,
+    "prodSalesPercent": 0.08,
+    "prodColors": ["#333333", "#FFFFFF"],
+    "prodType": "Dress",
+    "prodSeason": "Fall"
+},
+{
+    "prodName": "Woodland's Best Shirt",
+    "prodID": 9387687694888,
+    "prodPrice": 9.29,
+    "prodSale": false,
+    "prodSalesPercent": 0,
+    "prodColors": ["#338373", "#88783"],
+    "prodType": "Shirt",
+    "prodSeason": "Fall"
+},
+{
+    "prodName": "Skitown Pants",
+    "prodID": 93898747588,
+    "prodPrice": 12.75,
+    "prodSale": false,
+    "prodSalesPercent": 0,
+    "prodColors": ["#338373"],
+    "prodType": "Pants",
+    "prodSeason": "Winter"
+}
+]

@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import NotesForm
 from .models import Notes
 
+
 class NotesDeleteView(DeleteView):
     model = Notes
     success_url = '/smart/notes'

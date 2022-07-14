@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
 export const getProducts = async () => {
-    await axios.get('http://localhost:8000/smart/notes/api', {
+    await axios.get('http://localhost:8000/shop/api', {
         headers: {
             'Content-Type': 'application/json'
         }
