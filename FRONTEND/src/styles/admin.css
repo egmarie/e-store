@@ -103,3 +103,11 @@
 .no-list-style {
   list-style: none;
 }
+
+.list-item {
+  width: 20em;
+}
+
+.btn-icon {
+  width: 215em
+}

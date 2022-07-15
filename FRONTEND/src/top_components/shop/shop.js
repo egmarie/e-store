@@ -56,23 +56,11 @@ const [PRODUCTS, getPRODUCTS] = useState([])
           <div className='col-3 d-flex flex-column p-1 align-items-center'>
 
 
-            <div className='dropdown'>
-              <button className='btn btn-secondary dropdown-toggle m-0 container-fluid' type='button'
-              id='dropdownMenuButton1'
-  data-bs-toggle='dropdown' aria-expanded='false'>
-                Dropdown button
-              </button>
-                <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
-                  <li><a className='dropdown-item' href='#'>Action</a></li>
-                  <li><a className='dropdown-item' href='#'>Another action</a></li>
-                  <li><a className='dropdown-item' href='#'>Something else here</a></li>
-                </ul>
-            </div>
           </div>
 
 
           <div className='col-9 bg-light'>
-          <ul className='m-2'>
+          <ul className='m-0 p-0 d-flex flex-row justify-content-start align-items-center flex-wrap'>
           {PRODUCTS.map(prod => 
             <ProductList prods={PRODUCTS} prod={prod} id={prod.id} name={prod.name} price={prod.price} type={prod.type} season={prod.season} sale={prod.sale} key={prod.id} />
             )}
@@ -90,17 +78,106 @@ const [PRODUCTS, getPRODUCTS] = useState([])
 function ProductList(props) {
   return(
     <>
-    <li key={`${props.id}`} className='no-list-style'>
-      <div className=''>
-        <h6>{props.name}</h6>
-        <h4>{props.type}</h4>
-        <h5>{props.season}</h5>
+    <li key={`${props.id}`} className='no-list-style p-0 m-3 p-3 list-item bg-white'>
+      <div className='m-0 p-0 d-flex flex-column flex-fill '>
+
+        <div className='bg-secondary m-0 p-0 mb-3 justify-content-center align-items-center'>
+          <button className='m-0 btn p-0 d-flex justify-content-end align-items-start'>Wishlist</button>
+
+       </div>
+        
+      <div className='container gx-0 m-0 p-0'>
+        <div className='row d-flex flex-row m-0 p-0 justify-content-center align-items-center'>
+            <div className='col-9 col-sm-9 p-0 me-auto d-flex flex-column'>
+              <h6>{props.name}</h6>
+              <h4>{props.price}</h4>
+              </div>
+            <div className='col-3 col-sm-3  p-0 d-flex justify-content-end'>
+              <button className='m-0 btn p-0 flex-fill btn-icon'>a</button>
+            </div>
+        </div>
+      </div>
       </div>
     </li>
     
     </>
   )
 }
+function SearchSideBarWomens(props) {
+
+  return(
+    <>
+    <h3>Women's Clothing</h3>
+      <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label class="form-check-label" for="flexCheckDefault">
+              Dresses
+              </label>
+            </div>
+      <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            Tops
+            </label>
+          </div>
+    <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            Bottoms
+            </label>
+          </div>
+    <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            Sweaters and Cardigans
+            </label>
+          </div>
+
+    </>
+  )
+}
+
+function SearchSideBarSizes(props) {
+
+  return(
+    <>
+    <h3>Sizes</h3>
+      <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label class="form-check-label" for="flexCheckDefault">
+              S
+              </label>
+            </div>
+      <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            M
+            </label>
+          </div>
+    <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            L
+            </label>
+          </div>
+    <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            XL
+            </label>
+          </div>
+     <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label class="form-check-label" for="flexCheckChecked">
+            XXL
+            </label>
+          </div>
+
+    </>
+  )
+}
+
+
 
 
 /*
