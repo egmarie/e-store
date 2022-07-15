@@ -7,20 +7,17 @@ const axios = require('axios').default;
 
 import ProductDetail from './detail'
 import {getProducts} from '../axios'
+import ParentGetProducts from '../axios';
 
 
 const {Link, Route, Routes} = ReactRouterDOM
 
 
-export default function Shop() {
+export default function Shop(props) {
+  const products = props.products
 
-  // const [products, setProducts] = useState()
-  //   useEffect(() => {
-  //     console.log(getProducts)
-  //   }, [])
-getProducts()
-    //setProducts(getProds)
-    //console.log (products)
+  console.log(products)
+
 
   return (
     <>
@@ -45,13 +42,6 @@ getProducts()
 
 
           <div className='col-9 bg-light'>
-
-            <Routes>
-              
-                <Route path={`/detail:pk`} element={<ProductDetail />} />
-                
-
-            </Routes>
 
           </div>
         </div>

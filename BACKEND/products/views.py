@@ -18,7 +18,7 @@ class ProductsListView(ListView):
 
 def ProductsListAPI(request):
   
-    products_ = Products.objects.values('name', 'id', 'type')
+    products_ = Products.objects.values('name', 'id', 'type', 'price', 'season', 'sale')
     data = {
         'products' : list(products_)
     }

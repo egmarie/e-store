@@ -17,7 +17,9 @@ import ProductDetail from './top_components/shop/detail'
 import NotFound from './notfound'
 
 
+
 function App() {
+
 
   const [isNavActive, setNavActive] = useState('dashSeasonPage')
   
@@ -108,5 +110,7 @@ root.render(<App />);
 if (module.hot) {
    module.hot.accept() 
 }
+
+
 
 /*           */
