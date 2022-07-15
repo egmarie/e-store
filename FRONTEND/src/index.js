@@ -6,6 +6,7 @@ var ReactDOM = require('react-dom');
 var ReactRouterDOM = require('react-router-dom');
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import getProducts from './top_components/api_services/axios'
 //import ROUTES from './ROUTES'
 
 import Home from './top_components/home'
@@ -16,18 +17,32 @@ import ProductDetail from './top_components/shop/detail'
 
 import NotFound from './notfound'
 
+function Main() {
+  //const [products, getProds] = useState()
+  let products 
+  useEffect(() => {
+    products = getProducts() 
+  })
+  
+  return(
+    <>
 
+          <App products={products} />
 
-function App() {
+    </>
+  )
+}
 
+function App(props) {
 
   const [isNavActive, setNavActive] = useState('dashSeasonPage')
-  
 
     console.log('react is working')
     return(
         <>
-    <BrowserRouter>
+
+
+      <BrowserRouter>
       <header className="">
           <AdminNav isNavActive={isNavActive} setNavActive={setNavActive} />
         
@@ -35,14 +50,14 @@ function App() {
 
       <div className="container-fluid p-0 m-0 gx-0">
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home products={props.products}/>} />
           <Route path='/about' element={<About />} />
 
-          <Route path='/cart' element={<Cart />} >
+          <Route path='/cart' element={<Cart products={props.products} />} >
             
             </Route>
-          <Route path='/shop' element={<Shop />}>
-            <Route path='/shop/:id' element={<ProductDetail />} />
+          <Route path='/shop' element={<Shop products={props.products} />}>
+            <Route path='/shop/:id' element={<ProductDetail products={props.products} />} />
           </Route>
           <Route element={<NotFound />} />
         </Routes>
@@ -56,9 +71,10 @@ function App() {
           </Link>
         </p>
       </footer>
-    </BrowserRouter>
+      </BrowserRouter>
 
         </>
+        
 
         )
     }
@@ -103,14 +119,12 @@ function App() {
 
 const container = document.getElementById('app');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<App />);
+root.render(<Main />);
 
 
 
 if (module.hot) {
    module.hot.accept() 
 }
-
-
 
 /*           */

@@ -17,7 +17,7 @@ export default function ProductDetail() {
       <div className='row'>
         <div className='col-sm-9 col-md-9 col-lg-9 d-flex flex-column m-2 p-2'>
           <div id='chart4' className='shadow'>
-          
+          <HighchartsReact highcharts={Highcharts} options={chart1} isPureConfig={true} />
           </div>
 
 

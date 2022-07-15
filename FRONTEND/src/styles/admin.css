@@ -99,3 +99,7 @@
     height: auto;
     margin: 2%;
   }
+
+.no-list-style {
+  list-style: none;
+}
