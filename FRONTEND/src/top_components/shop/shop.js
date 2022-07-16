@@ -14,6 +14,10 @@ const {Link, Route, Routes} = ReactRouterDOM
 export default function Shop() {
 
 const [PRODUCTS, getPRODUCTS] = useState([])
+const [sortType, setSortType] = useState('priceLH');
+const [data, setData] = useState([])
+
+
 
     const getProds = async () => {
     await axios.get('http://localhost:8000/shop/api', {
@@ -40,12 +44,17 @@ const [PRODUCTS, getPRODUCTS] = useState([])
   console.log("OUTSIDE")
   console.log(PRODUCTS)
 
-  //PRODUCTS.map(prod => console.log(prod))
-        
 
-        //<Routes>
-        //<Route path={`/detail:pk`} element={<ProductDetail />} />
-        //</Routes>
+  useEffect(() => {
+    const sortArray = (type) => {
+      const sortedLH = [...PRODUCTS].sort((a, b) => b[price] - a[price]);
+      const sortedHL = [...PRODUCTS].sort((a, b) => a[price] - b[price]);
+      type === 'priceHL' ? setData(sortedHL) : setData(sortedLH)
+    }
+  sortArray(sortType)
+  }, [sortType]) 
+
+
 
   return(
 
@@ -53,22 +62,32 @@ const [PRODUCTS, getPRODUCTS] = useState([])
     
       <div className='container-fluid gx-0 p-0 m-0'>
         <div className='row'>
-          <div className='col-3 d-flex flex-column p-1 align-items-center'>
-
+          <div className='col-3 ps-4 pe-3 py-4 d-flex flex-column p-1 align-items-start justify-content-start'>
+            <SearchSideBarWomens />
+            <SearchSideBarSizes />
+            <SearchSideBarPrices />
 
           </div>
 
 
           <div className='col-9 bg-light'>
-          <ul className='m-0 p-0 d-flex flex-row justify-content-start align-items-center flex-wrap'>
-          {PRODUCTS.map(prod => 
-            <ProductList prods={PRODUCTS} prod={prod} id={prod.id} name={prod.name} price={prod.price} type={prod.type} season={prod.season} sale={prod.sale} key={prod.id} />
-            )}
+          <div className="App">
+              <select onChange={(e) => setSortType(e.target.value)}> 
+                  <option value="priceHL">Prices High to Low</option>
+                  <option value="priceLH">Prices Low to High</option>
+            </select>
+              <ul className='m-0 p-0 pt-2 pb-5 ps-4 d-flex flex-row justify-content-start align-items-center flex-wrap'>
+            {data.map(prod => 
+              <ProductList prods={data} prod={prod} id={prod.id} name={prod.name} price={prod.price} type={prod.type} season={prod.season} sale={prod.sale} key={prod.id} />
+              )}
+          
+
             </ul>
 
           </div>
         </div>
 
+      </div>
       </div>
 
     </>
@@ -107,31 +126,34 @@ function SearchSideBarWomens(props) {
 
   return(
     <>
-    <h3>Women's Clothing</h3>
-      <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-              <label class="form-check-label" for="flexCheckDefault">
+    <div className='d-flex flex-column justify-content-start align-items-start'>
+    <h5>Women's Clothing</h5>
+      <div className="form-check ms-3">
+            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label className="form-check-label" htmlFor="flexCheckDefault">
               Dresses
               </label>
             </div>
-      <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+      <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             Tops
             </label>
           </div>
-    <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+    <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             Bottoms
             </label>
           </div>
-    <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+    <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             Sweaters and Cardigans
             </label>
           </div>
+
+  </div>
 
     </>
   )
@@ -141,36 +163,104 @@ function SearchSideBarSizes(props) {
 
   return(
     <>
-    <h3>Sizes</h3>
-      <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-              <label class="form-check-label" for="flexCheckDefault">
+    <div className='d-flex flex-column justify-content-start align-items-start'>
+    <h5>Sizes</h5>
+      <div className="form-check ms-3">
+            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label className="form-check-label" htmlFor="flexCheckDefault">
               S
               </label>
             </div>
-      <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+      <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             M
             </label>
           </div>
-    <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+    <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             L
             </label>
           </div>
-    <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+    <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             XL
             </label>
           </div>
-     <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label class="form-check-label" for="flexCheckChecked">
+     <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
             XXL
             </label>
+          </div>
+      </div>    
+          
+
+
+    </>
+  )
+}
+
+function SearchSideBarPrices(props) {
+
+  return(
+    <>
+    <div className='d-flex flex-column justify-content-start align-items-start'>
+    <h5>Prices</h5>
+      <div className="form-check ms-3">
+            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+              <label className="form-check-label" htmlFor="flexCheckDefault">
+              $50 & under
+              </label>
+            </div>
+      <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
+            $51 - $100
+            </label>
+          </div>
+    <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
+            $101 - $150
+            </label>
+          </div>
+    <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
+            $151 - $250
+            </label>
+          </div>
+     <div className="form-check ms-3">
+          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+            <label className="form-check-label" htmlFor="flexCheckChecked">
+            $251 & Over
+            </label>
+          </div>
+
+          </div>
+
+    </>
+  )
+}
+
+function TopFilterDropdown(props) {
+
+  return(
+    <>
+    <div className='d-flex flex-column justify-content-center align-items-end'>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-1 mt-3 px-2 py-1 d-flex flex-fill" type="button" id="sortBy" data-bs-toggle="dropdown" aria-expanded="false">
+            Sort By
+          </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+           <li><a class="dropdown-item" href="#">Price High to Low</a></li>
+           <li><a class="dropdown-item" href="#">Price Low to High</a></li>
+         </ul>
+      </div>
           </div>
 
     </>

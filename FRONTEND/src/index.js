@@ -103,12 +103,12 @@ function App(props) {
                 <Link to='/about' className={`px-2 ${props.isNavActive === 'gameSchedulePage' ? 'activeNavPage' : ''}`}
                   onClick={e => handleActiveToggle('gameSchedulePage')} id='gameSchedulePage'>About</Link>
     
-                <Link to='/cart' className={`px-2 ${props.isNavActive === 'manageUsersPage' ? 'activeNavPage' : ''}`}
-                  onClick={e => handleActiveToggle('manageUsersPage')} id='manageUsersPage'>Cart</Link>
               </div>
     
               <div className='col-2 d-flex justify-content-start align-items-center m-0'>
                 <Link to='/manage-users' className='px-4 py-2 border border-white rounded-pill'>Logout</Link>
+                <Link to='/cart' className={`px-2 ${props.isNavActive === 'manageUsersPage' ? 'activeNavPage' : ''}`}
+                  onClick={e => handleActiveToggle('manageUsersPage')} id='manageUsersPage'>Cart</Link>
               </div>
             </div>
           </div>
