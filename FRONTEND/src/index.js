@@ -1,7 +1,7 @@
 import './styles/main.scss'
 import './styles/calendar.scss'
 var React = require('react');
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useReducer} from 'react';
 var ReactDOM = require('react-dom');
 var ReactRouterDOM = require('react-router-dom');
 import { createRoot } from 'react-dom/client';
@@ -18,6 +18,7 @@ import ProductDetail from './top_components/shop/detail'
 import NotFound from './notfound'
 
 function Main() {
+  
   //const [products, getProds] = useState()
   let products 
   useEffect(() => {
