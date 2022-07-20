@@ -111,3 +111,11 @@
 .btn-icon {
   width: 215em
 }
+
+.ChangeProductNumberCart {
+  width: 1.5em;
+  height: 1.5em;
+}
+#ChangeProductNumberCart {
+  width: 7em;
+}

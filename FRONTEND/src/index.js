@@ -1,7 +1,7 @@
 import './styles/main.scss'
 import './styles/calendar.scss'
 var React = require('react');
-import { useEffect, useState, useReducer} from 'react';
+import { useEffect, useState, useReducer, useContext} from 'react';
 var ReactDOM = require('react-dom');
 var ReactRouterDOM = require('react-router-dom');
 import { createRoot } from 'react-dom/client';
@@ -17,7 +17,46 @@ import ProductDetail from './top_components/shop/detail'
 
 import NotFound from './notfound'
 
+
+
+export const CartContext = React.createContext()
+const initialState = []
+
+const reducer = (state, action) => {
+  switch (action.types) {
+
+  case 'ADD':
+      return [...state, {
+
+          productInstance: action.productInstance,
+          dateAdded: action.dateAdded,
+          product_id: action.id,
+          name: action.name,
+          price: action.price,
+          season: action.season,
+          type: action.type,
+          numberOrdered: action.numberOrdered,
+      }]
+  case 'DELETE':
+      return state.filter((_, index) => index != action.index);
+  case 'DELETE_ALL':
+      return state.map((cartItem) => {
+          if (cartItem.id === action.id) {
+              return { ...cartItem, complete: !todo.complete };
+          } else {
+              return todo;
+          }
+          });
+
+    default:
+      return state;
+
+  }
+};
+
 function Main() {
+  const[cart, dispatch] = useReducer(reducer, initialState)
+
   
   //const [products, getProds] = useState()
   let products 
@@ -27,8 +66,9 @@ function Main() {
   
   return(
     <>
-
+        <CartContext.Provider value={{ shoppingCart: cart, cartDispatch: dispatch}}>
           <App products={products} />
+        </CartContext.Provider>
 
     </>
   )
@@ -109,7 +149,9 @@ function App(props) {
               <div className='col-2 d-flex justify-content-start align-items-center m-0'>
                 <Link to='/manage-users' className='px-4 py-2 border border-white rounded-pill'>Logout</Link>
                 <Link to='/cart' className={`px-2 ${props.isNavActive === 'manageUsersPage' ? 'activeNavPage' : ''}`}
-                  onClick={e => handleActiveToggle('manageUsersPage')} id='manageUsersPage'>Cart</Link>
+                  onClick={e => handleActiveToggle('manageUsersPage')} id='manageUsersPage'><span className="material-symbols-outlined">
+                  shopping_cart
+                  </span></Link>
               </div>
             </div>
           </div>

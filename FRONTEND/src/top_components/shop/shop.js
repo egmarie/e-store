@@ -1,9 +1,10 @@
 import '../../styles/admin.css'
 var React = require('react');
-import {useEffect, useState, useReducer} from 'react';
+import {useEffect, useState, useReducer, useContext} from 'react';
 var ReactDOM = require('react-dom');
 var ReactRouterDOM = require('react-router-dom');
-const axios = require('axios').default;
+const axios = require('axios')
+import {CartContext } from '../../index.js'
 
 import ProductDetail from './detail'
 import {getProducts, ProdContext} from '../api_services/axios'
@@ -12,6 +13,14 @@ import {getProducts, ProdContext} from '../api_services/axios'
 const {Link, Route, Routes} = ReactRouterDOM
 
 export default function Shop() {
+  const cartContext = useContext(CartContext) 
+
+  useEffect(() => {
+    console.log("CART")
+    console.log(cartContext.shoppingCart)
+    console.log(cartContext)
+  }, [cartContext])
+ 
 
 const [PRODUCTS, getPRODUCTS] = useState([])
 const [data, setData] = useState(PRODUCTS)
@@ -88,7 +97,7 @@ const initialTypes = [
   }
 ];
 
-const reducer = (state, action) => {
+const reducerTypes = (state, action) => {
   switch (action.type) {
     case "FILTER":
       return state.map((filter1) => {
@@ -103,7 +112,7 @@ const reducer = (state, action) => {
   }
 };
 
-const [filters, dispatch] = useReducer(reducer, initialTypes);
+const [filters, dispatch] = useReducer(reducerTypes, initialTypes);
 
 const [sortSizes, setSortSizes] = useState([
   {s: false},
@@ -271,9 +280,9 @@ const [sortSizes, setSortSizes] = useState([
       <div className='container-fluid gx-0 p-0 m-0'>
         <div className='row'>
           <div className='col-3 ps-4 pe-3 py-4 d-flex flex-column p-1 align-items-start justify-content-start'>
-            <SearchSideBarWomens filters={filters} dispatch={dispatch} reducer={reducer} />
-            <SearchSideBarSizes filters={filters} dispatch={dispatch} reducer={reducer} />
-            <SearchSideBarPrices filters={filters} dispatch={dispatch} reducer={reducer} setPriceRange={setPriceRange} />
+            <SearchSideBarWomens filters={filters} dispatch={dispatch} reducer={reducerTypes} cartContext={cartContext} />
+            <SearchSideBarSizes filters={filters} dispatch={dispatch} reducer={reducerTypes} />
+            <SearchSideBarPrices filters={filters} dispatch={dispatch} reducer={reducerTypes} setPriceRange={setPriceRange} cartContext={cartContext} />
 
           </div>
 
@@ -302,13 +311,19 @@ const [sortSizes, setSortSizes] = useState([
 }
 
 function ProductList(props) {
+  const cartContext = useContext(CartContext)
+  /*<span className="material-symbols-outlined">
+add_circle
+</span>  */
   return(
     <>
     <li key={`${props.id}`} className='no-list-style p-0 m-3 p-3 list-item bg-white'>
       <div className='m-0 p-0 d-flex flex-column flex-fill '>
 
         <div className='bg-secondary m-0 p-0 mb-3 justify-content-center align-items-center'>
-          <button className='m-0 btn p-0 d-flex justify-content-end align-items-start'>Wishlist</button>
+          <button className='m-0 btn p-0 d-flex justify-content-end align-items-start'><span className="material-symbols-outlined">
+favorite
+</span></button>
 
        </div>
         
@@ -319,7 +334,7 @@ function ProductList(props) {
               <h4>{props.price}</h4>
               </div>
             <div className='col-3 col-sm-3  p-0 d-flex justify-content-end'>
-              <button className='m-0 btn p-0 flex-fill btn-icon'>a</button>
+              <button className='m-0 btn p-0 flex-fill btn-icon' onClick={() => cartContext.cartDispatch( {types: 'ADD', id: props.id, name: props.name, price: props.price, season: props.season, type: props.type, dateAdded: Date.now(), productInstance: Date.now(), numberOrdered: 1})}>add</button>
             </div>
         </div>
       </div>
@@ -332,7 +347,7 @@ function ProductList(props) {
 function SearchSideBarWomens(props) {
 
 
-      let reducer = props.reducer
+      let reducer = props.reducerTypes
       let dispatch = props.dispatch
       let filters = props.filters
 
@@ -408,7 +423,7 @@ function SearchSideBarSizes(props) {
 }
 
 function SearchSideBarPrices(props) {
-  let reducer = props.reducer
+  let reducer = props.reducerTypes
   let dispatch = props.dispatch
   let filters = props.filters
 
