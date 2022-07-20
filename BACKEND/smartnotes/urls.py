@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('smart/', include('notes.urls')),
-    path('shop/', include('products.urls'))
+    path('shop/', include('products.urls')),
+    path('cart/', include('cart.urls'))
 ]
