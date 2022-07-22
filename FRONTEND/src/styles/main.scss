@@ -5,14 +5,12 @@ $mdPink: #C46279;
 $dkPink: #811B33;
 
 /* blue */
-$ltBlue: #87BCBF;
-$blue: #1D9FDE;
-$mdBlue: #111688;
-/*$dkBlue: #324755;*/
-$dkBlue: #595959;
+
+
 
 $header-font: Montserrat, sans-serif;
 $body-font-family: work-sans, sans-serif;
+$fancy-font-family: 'Cormorant SC', serif;
 
 @mixin for-phone-only {
   @media (max-width: 400px) { @content; }
@@ -31,12 +29,9 @@ $body-font-family: work-sans, sans-serif;
 }
 
 
-
-
-
 h1 {
   font-family: $header-font;
-  color: $mdBlue;
+ 
   font-size: 3.3em;
   letter-spacing: .08em;
   line-height: 1em;
@@ -44,14 +39,18 @@ h1 {
     font-size: 3rem;
 }
 }
+
+h3 #fancy {
+  font-family: $fancy-font-family;
+
+}
 h2 {
-  font-family: $header-font;
-  color: $mdBlue;
+  font-family: $fancy-font-family;
+
   font-size: 2.4em;
 }
 h3 {
-  font-family: $header-font;
-  color: $mdBlue;
+
   font-size: 2em;
   letter-spacing: .03em;
   text-transform: uppercase;
@@ -59,7 +58,7 @@ h3 {
 }
 h4 {
   font-family: $body-font-family;
-  color: $mdBlue;
+
   font-size: 1em;
   font-weight: 300;
   letter-spacing: .018em;
@@ -67,16 +66,15 @@ h4 {
 }
 h5 {
   font-family: $body-font-family;
-  color: $mdPink;
   font-size: .9em;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
 }
 h6 {
   font-family: $body-font-family;
-  color: $mdBlue;
-  font-size: 1.2em;
-  font-weight: 600;
+
+  font-size: .9em;
+  font-weight: 400;
   letter-spacing: .05em;
     @include for-phone-only {    
       font-size: 1rem;
@@ -84,7 +82,7 @@ h6 {
 }
 p {
   font-family: $body-font-family;
-  color: $dkBlue;
+
   font-size: 1rem;
   font-weight: 400;
 @include for-tablet-portrait-up()  {    
@@ -143,15 +141,30 @@ button {
   margin: 1.5rem;
 }
 
+.icons {
+  width: 2em;
+  height: 2em;
+}
 
-/*
-.navlink.active {
-  color: $orange; 
+.icons:hover {
+  filter: brightness(160%);
+  transform: scale(1.2, 1.2);
 }
-.navlink {
-  color: $orange; 
+
+.list-item:hover {
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  cursor: pointer;
 }
-*/
+.form-check:hover, .form-check-input:hover, .form-check-label:hover, select:hover {
+  cursor: pointer;
+}
+
+select:hover {
+  filter: brightness(130%)
+}
+
 
 body {
     margin: 0;
@@ -204,5 +217,43 @@ a:active
 #chart3 {
   padding: 20px;
 }
+
+
+
+.no-list-style {
+  list-style: none;
+}
+
+.list-item {
+  width: 17em;
+}
+.img-holder {
+  height: 15em;
+}
+
+.btn-icon {
+  width: 215em
+}
+
+.ChangeProductNumberCart {
+  width: 1.5em;
+  height: 1.5em;
+}
+#ChangeProductNumberCart {
+  width: 7em;
+}
  
- 
+.list-item-title {
+  height: 3em;
+}
+
+input {
+  font-family: $body-font-family;
+}
+
+
+
+
+
+
+

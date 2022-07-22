@@ -3,12 +3,14 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import { useEffect, useState} from 'react';
 var ReactRouterDOM = require('react-router-dom');
+import { Link, useParams} from 'react-router-dom';
 
-
-const {Link} = ReactRouterDOM
-
+import add_circle from '../../imgs/add_circle.png'
+import shopping_cart_icon from '../../imgs/shopping_cart_icon.png'
+import wishlist_icon from '../../imgs/wishlist_icon.png'
 export default function ProductDetail() {
-
+  const [animal, setAnimal] = useState({ name: "", species: "" })
+  let { id } = useParams()
     return(
       <>
 
@@ -16,30 +18,14 @@ export default function ProductDetail() {
       <h1 className='m-2'>Game Title and ID</h1>
       <div className='row'>
         <div className='col-sm-9 col-md-9 col-lg-9 d-flex flex-column m-2 p-2'>
-          <div id='chart4' className='shadow'>
-          <HighchartsReact highcharts={Highcharts} options={chart1} isPureConfig={true} />
-          </div>
+
 
 
         </div>
 
 
-        <div className='col m-2 d-flex flex-column p-0'>
-          <div className='m-2 p-2 shadow'>
-            <h4>total players this week</h4>
-            <div id='chart_game_total_players'></div>
-          </div>
-          <div className='m-2 p-2 shadow'>
-            <h4>winners</h4>
-            <div id='chart_game_winners'></div>
-          </div>
-          <div className='m-2 p-2 shadow'>
-            <h4>prizes claimed</h4>
-            <div id='chart_game_prizes_claimed'></div>
-          </div>
-
         </div>
-      </div>
+
 
     </div>
 

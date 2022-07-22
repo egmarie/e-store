@@ -1,11 +1,10 @@
 import '../styles/admin.css'
-import '../styles/calendar.scss'
+import '../styles/range-slider.scss'
 var React = require('react');
 var ReactDOM = require('react-dom');
 var ReactRouterDOM = require('react-router-dom');
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Calendar from 'react-calendar';
 
 export default function About() {
   const [gameEvents, setGameEvents] = useState([]);

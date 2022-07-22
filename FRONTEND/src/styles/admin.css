@@ -14,7 +14,6 @@
     height: 3px;
     background: #B41810;
     border-width: 0;
-    
   }
   
   #secondLine {
@@ -44,21 +43,23 @@
     color: #B41810;
   }
   
-  
+  .nav-page {
+    border-bottom: 1px solid white;
+  }
   .activeNavPage {
-    border-bottom: 3px solid white;
+    border-bottom: 1px solid grey;
+    font-weight: 600;
   }
-  
-  .activeNavPage a {
-    color: white;
+
+  a {
+    text-decoration: none;
+    color: #5F5F5F;
   }
-  
-  #NavContainer a {
-    color: #D3D3D3;
-  }
-  
-  #dashToggle div a {
-    color: #939393;
+
+  a:hover {
+    text-decoration: none;
+    color: #403E3E;
+    
   }
   
   
@@ -72,50 +73,8 @@
   }
 
 
-  #chart4 {
-    width: auto;
-    height: 400px
-  }
-/*
-  .season-top-two-charts {
-    width: 47%;
-    height: auto;
-    padding: 1.5%;
-    
-  } */
 
-#averagePlayers {
-    width: 100%;
-    height: auto;
-  }
 
-  #chart_season_engagement_line, #chart_season_top_three_games, #chart_season_players_per_event {
-    width: 100%;
-    height: auto;
 
-  }
-  .season_chart_row {
-    width: 46%;
-    height: auto;
-    margin: 2%;
-  }
 
-.no-list-style {
-  list-style: none;
-}
 
-.list-item {
-  width: 20em;
-}
-
-.btn-icon {
-  width: 215em
-}
-
-.ChangeProductNumberCart {
-  width: 1.5em;
-  height: 1.5em;
-}
-#ChangeProductNumberCart {
-  width: 7em;
-}

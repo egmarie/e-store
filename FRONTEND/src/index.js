@@ -1,5 +1,6 @@
 import './styles/main.scss'
-import './styles/calendar.scss'
+import './styles/range-slider.scss'
+
 var React = require('react');
 import { useEffect, useState, useReducer, useContext} from 'react';
 var ReactDOM = require('react-dom');
@@ -17,6 +18,9 @@ import ProductDetail from './top_components/shop/detail'
 
 import NotFound from './notfound'
 
+import shopping_cart_icon from './imgs/shopping_cart_icon.png'
+
+
 
 
 export const CartContext = React.createContext()
@@ -26,17 +30,54 @@ const reducer = (state, action) => {
   switch (action.types) {
 
   case 'ADD':
-      return [...state, {
-
+    if  (state.some(element => (element.id === action.id))) {
+      return ( state.map((item) => {
+        if (item.id === action.id) {
+          return { ...item, quantity: item.quantity + 1};
+        } else {
+          return item;
+        }
+      })
+      )
+      } else {
+        return(
+          [...state, {
           productInstance: action.productInstance,
           dateAdded: action.dateAdded,
-          product_id: action.id,
+          id: action.id,
           name: action.name,
           price: action.price,
           season: action.season,
           type: action.type,
-          numberOrdered: action.numberOrdered,
+          quantity: action.quantity,
+          totalPrice: action.price,
+          pic: action.pic
       }]
+      )
+
+        
+    }
+  case 'INCREASE_QUANTITY':
+      return( state.map((item) => {
+        if (item.id === action.id) {
+          return { ...item, quantity: item.quantity + 1};
+        } else {
+          return item;
+        }
+      })
+      ) 
+  case 'DECREASE_QUANTITY':
+      return( state.map((item) => {
+        console.log(item.id)
+        console.log(action.id)
+        if (item.id === action.id) {
+
+            return { ...item, quantity: item.quantity - 1};
+          } else {
+            return item;
+          }
+        })
+        )
   case 'DELETE':
       return state.filter((_, index) => index != action.index);
   case 'DELETE_ALL':
@@ -89,7 +130,7 @@ function App(props) {
         
       </header>
 
-      <div className="container-fluid p-0 m-0 gx-0">
+      <div className="container-fluid p-0 pt-5 m-0 mt-5 gx-0">
         <Routes>
           <Route index element={<Home products={props.products}/>} />
           <Route path='/about' element={<About />} />
@@ -125,36 +166,48 @@ function App(props) {
         props.setNavActive(id)
       }
     
+<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+
+
+
+
+
+
       return (
         <>
-          <div className='container-fluid gx-0 bg-dark text-light p-3'>
-    
-            <div className='row'>
-    
-              <div className='col-2'>
-                <Link to='/' className={`px-2 justify-content-start m-0 ${props.isNavActive === 'homePage' ? 'activeNavPage' : ''}`}
-                  onClick={e => handleActiveToggle('homePage')} id='homePage'>ATL Logo</Link>
-              </div>
-    
-              <div className='col-8 m-0 px-0 d-flex justify-content-center align-items-center' id='navContainer'>
-                <Link to='/shop' 
-            className={`px-2 ${props.isNavActive === 'dashboardPage' ? 'activeNavPage' : ''}`}
+            <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+
+            <Link to='/' className={` px-2 justify-content-start navbar-branc nav-link m-0 ${props.isNavActive === 'homePage' ? 'activeNavPage' : ''}`}
+                  onClick={e => handleActiveToggle('homePage')} id='homePage'><h3 id='fancy'>Hem's Goods</h3></Link>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column flex-sm-column flex-md-row flex-lg-row flex-xl-row flex-xxl-row align-items-start align-items-sm-start justify-content-md-end align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center justify-content-lg-end justify-content-xl-end justify-content-xxl-end">
+            
+               
+              
+              <li className='m-0 nav-item px-0' id='navContainer'>
+                  <Link to='/shop' className={`px-2 m-0 nav-page nav-link ${props.isNavActive === 'dashboardPage' ? 'activeNavPage' : ''}`}
                   onClick={e => handleActiveToggle('dashboardPage')} id='dashboardPage'>Shop</Link>
-    
-                <Link to='/about' className={`px-2 ${props.isNavActive === 'gameSchedulePage' ? 'activeNavPage' : ''}`}
+              </li>
+              <li>
+                <Link to='/about' className={`nav-page px-2 m-0 ${props.isNavActive === 'gameSchedulePage' ? 'activeNavPage' : ''}`}
                   onClick={e => handleActiveToggle('gameSchedulePage')} id='gameSchedulePage'>About</Link>
-    
-              </div>
-    
-              <div className='col-2 d-flex justify-content-start align-items-center m-0'>
-                <Link to='/manage-users' className='px-4 py-2 border border-white rounded-pill'>Logout</Link>
+               </li>
+              
+              <li className='d-flex nav-link justify-content-start align-items-center m-0'>
                 <Link to='/cart' className={`px-2 ${props.isNavActive === 'manageUsersPage' ? 'activeNavPage' : ''}`}
-                  onClick={e => handleActiveToggle('manageUsersPage')} id='manageUsersPage'><span className="material-symbols-outlined">
-                  shopping_cart
-                  </span></Link>
-              </div>
-            </div>
-          </div>
+                  onClick={e => handleActiveToggle('manageUsersPage')} id='manageUsersPage'><img className='icons' src={shopping_cart_icon} /></Link>
+              </li>
+       </ul>
+      </div>
+   
+              </nav>
         </>
       )
     }
@@ -170,4 +223,4 @@ if (module.hot) {
    module.hot.accept() 
 }
 
-/*           */
+/*   <Link to='/manage-users' className='px-4 py-2 border border-white rounded-pill'>Logout</Link>         */

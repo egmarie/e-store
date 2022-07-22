@@ -1,6 +1,8 @@
 import '../../styles/admin.css'
+import '../../styles/main.scss'
+import '../../styles/range-slider.scss'
 var React = require('react');
-import {useEffect, useState, useReducer, useContext} from 'react';
+import {useEffect, useState, useReducer, useContext, useRef, useCallback} from 'react';
 var ReactDOM = require('react-dom');
 var ReactRouterDOM = require('react-router-dom');
 const axios = require('axios')
@@ -9,8 +11,20 @@ import {CartContext } from '../../index.js'
 import ProductDetail from './detail'
 import {getProducts, ProdContext} from '../api_services/axios'
 
-
+import dress1 from '../../imgs/dress1.png'
+import edress2 from '../../imgs/edress2.png'
+import dress3 from '../../imgs/dress3.png'
+import epants from '../../imgs/epants.png'
+import eshorts from '../../imgs/eshorts.png'
+import add_circle from '../../imgs/add_circle.png'
+import shopping_cart_icon from '../../imgs/shopping_cart_icon.png'
+import wishlist_icon from '../../imgs/wishlist_icon.png'
 const {Link, Route, Routes} = ReactRouterDOM
+import SearchSideBarWomens from './filters/filter_womens';
+import SearchSideBarSizes from './filters/filter_sizes';
+import SearchSideBarPrices from './filters/filter_prices';
+import ProductList from './product_map_item';
+
 
 export default function Shop() {
   const cartContext = useContext(CartContext) 
@@ -30,10 +44,6 @@ const [filteredData, setFilteredData] = useState([])
 //const [filters, setFilters] = ([])
 const [priceRange, setPriceRange] = useState([
   {underFifty: []},
-  {fifty_oneHundred: []},
-  {hundredOne_oneFifty: []},
-  {oneFiftyOne_twoFifty: []},
-  {over_twoFifty: []} 
 ])
 
 const initialTypes = [
@@ -57,43 +67,11 @@ const initialTypes = [
   },
   {
     id: 4,
-    title: "under50",
-    type: "price",
-    filter: false,
-    min: 0,
-    max: 50 
-  },
-  {
-    id: 5,
-    title: "51to100",
-    type: "price",
-    filter: false,
-    min: 51,
-    max: 100 
-  },
-  {
-    id: 6,
-    title: "101to150",
-    type: "price",
-    filter: false,
-    min: 101,
-    max: 150 
-  },
-  {
-    id: 7,
-    title: "150to250",
-    type: "price",
-    filter: false, 
-    min: 151,
-    max: 250
-  },
-  {
-    id: 8,
     title: "over250",
     type: "price",
     filter: false, 
-    min: 251,
-    max: 1000
+    min: 0,
+    max: 500 
   }
 ];
 
@@ -105,11 +83,12 @@ const reducerTypes = (state, action) => {
           return { ...filter1, filter: !filter1.filter };
         } else {
           return filter1;
-        }
-      });
-    default:
+            }
+          });
+        default:
       return state;
-  }
+    }
+
 };
 
 const [filters, dispatch] = useReducer(reducerTypes, initialTypes);
@@ -268,35 +247,54 @@ const [sortSizes, setSortSizes] = useState([
 
   //FilterMinMax(PRODUCTS, 150, 200) 
 
-
-  
- 
-
-
   return(
 
     <>
     
       <div className='container-fluid gx-0 p-0 m-0'>
         <div className='row'>
-          <div className='col-3 ps-4 pe-3 py-4 d-flex flex-column p-1 align-items-start justify-content-start'>
-            <SearchSideBarWomens filters={filters} dispatch={dispatch} reducer={reducerTypes} cartContext={cartContext} />
-            <SearchSideBarSizes filters={filters} dispatch={dispatch} reducer={reducerTypes} />
-            <SearchSideBarPrices filters={filters} dispatch={dispatch} reducer={reducerTypes} setPriceRange={setPriceRange} cartContext={cartContext} />
+          <div className='col-md-3 col-lg-3 col-xl-3 px-5 py-4 d-flex flex-column p-1 align-items-start justify-content-start'>
 
+              <nav className="navbar navbar-expand-lg navbar-light bg-white">
+
+                   <button className="navbar-toggler d-flex d-sm-flex d-md-none d-lg-none d-xl-none d-xxl-none" type="button" data-bs-toggle="collapse" data-bs-target="#FilterList" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span>
+              Filters</span>
+                 </button>
+
+                <div className="collapse multi-collapse navbar-collapse" id="FilterList">
+
+                  <h4 className='d-none d-sm-none'>Filters</h4>
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column justify-content-center align-items-start">
+            <li>
+                <SearchSideBarWomens filters={filters} dispatch={dispatch} reducer={reducerTypes} cartContext={cartContext} />
+            </li>
+            <li>
+                <SearchSideBarSizes filters={filters} dispatch={dispatch} reducer={reducerTypes} />
+            </li>
+            <li>
+                <SearchSideBarPrices filters={filters} dispatch={dispatch} reducer={reducerTypes} setPriceRange={setPriceRange} cartContext={cartContext} min={0} max={500} onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} />
+            </li>
+          </ul>
+                  </div>
+
+
+
+               </nav>
           </div>
 
 
-          <div className='col-9 bg-light'>
+          <div className='col-md-9 col-lg-9 col-xl-9  bg-light'>
           <div className="App">
+            <div className='d-flex justify-content-end align-items-center mt-3 mx-5 mb-1'>
               <select onChange={(e) => setSortType(e.target.value)}> 
                   <option value="priceLH">Prices Low to High</option>
                   <option value="priceHL">Prices High to Low</option>
                 </select>
+                </div>
 
               <ul className='m-0 p-0 pt-2 pb-5 ps-4 d-flex flex-row justify-content-start align-items-center flex-wrap'>
             {PRODUCTS.map(prod => 
-              <ProductList prods={data} prod={prod} id={prod.id} name={prod.name} price={prod.price} type={prod.type} season={prod.season} sale={prod.sale} key={prod.id} />
+              <ProductList prods={data} prod={prod} id={prod.id} name={prod.name} price={prod.price} type={prod.type} season={prod.season} sale={prod.sale} key={prod.id} pic={prod.pic} />
               )}
             </ul>
 
@@ -310,169 +308,6 @@ const [sortSizes, setSortSizes] = useState([
   )
 }
 
-function ProductList(props) {
-  const cartContext = useContext(CartContext)
-  /*<span className="material-symbols-outlined">
-add_circle
-</span>  */
-  return(
-    <>
-    <li key={`${props.id}`} className='no-list-style p-0 m-3 p-3 list-item bg-white'>
-      <div className='m-0 p-0 d-flex flex-column flex-fill '>
-
-        <div className='bg-secondary m-0 p-0 mb-3 justify-content-center align-items-center'>
-          <button className='m-0 btn p-0 d-flex justify-content-end align-items-start'><span className="material-symbols-outlined">
-favorite
-</span></button>
-
-       </div>
-        
-      <div className='container gx-0 m-0 p-0'>
-        <div className='row d-flex flex-row m-0 p-0 justify-content-center align-items-center'>
-            <div className='col-9 col-sm-9 p-0 me-auto d-flex flex-column'>
-              <h6>{props.name}</h6>
-              <h4>{props.price}</h4>
-              </div>
-            <div className='col-3 col-sm-3  p-0 d-flex justify-content-end'>
-              <button className='m-0 btn p-0 flex-fill btn-icon' onClick={() => cartContext.cartDispatch( {types: 'ADD', id: props.id, name: props.name, price: props.price, season: props.season, type: props.type, dateAdded: Date.now(), productInstance: Date.now(), numberOrdered: 1})}>add</button>
-            </div>
-        </div>
-      </div>
-      </div>
-    </li>
-    
-    </>
-  )
-}
-function SearchSideBarWomens(props) {
 
 
-      let reducer = props.reducerTypes
-      let dispatch = props.dispatch
-      let filters = props.filters
-
-      const handleFilterSwitch = (filter1) => {
-        dispatch({ type: "FILTER", id: filter1.id });
-      };
-
-      let typeFilters = filters.filter(filter1 => filter1.type === 'types')
-
-
-  return(
-    <>
-    <div className='d-flex flex-column justify-content-start align-items-start'>
-      <h5>Women's Clothing</h5>
-
-            {typeFilters.map((filter1 =>
-                  <div key={filter1.id} className="form-check ms-3">
-                      <input className="form-check-input" type="checkbox" checked={filter1.filter} value={filter1.type} onChange={() => handleFilterSwitch(filter1)} id="flexCheckDefault"/>
-                      <label className="form-check-label" htmlFor="flexCheckDefault">
-                          {filter1.title}
-                      </label>
-                    </div>
-              ))}
-
-    </div>
-
-    </>
-  )
-}
-
-function SearchSideBarSizes(props) {
-
-  return(
-    <>
-    <div className='d-flex flex-column justify-content-start align-items-start'>
-    <h5>Sizes</h5>
-      <div className="form-check ms-3">
-            <input className="form-check-input" type="checkbox" id="flexCheckDefault"/>
-              <label className="form-check-label" htmlFor="flexCheckDefault">
-              S
-              </label>
-            </div>
-      <div className="form-check ms-3">
-          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label className="form-check-label" htmlFor="flexCheckChecked">
-            M
-            </label>
-          </div>
-    <div className="form-check ms-3">
-          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label className="form-check-label" htmlFor="flexCheckChecked">
-            L
-            </label>
-          </div>
-    <div className="form-check ms-3">
-          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label className="form-check-label" htmlFor="flexCheckChecked">
-            XL
-            </label>
-          </div>
-     <div className="form-check ms-3">
-          <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-            <label className="form-check-label" htmlFor="flexCheckChecked">
-            XXL
-            </label>
-          </div>
-      </div>    
-          
-
-
-    </>
-  )
-}
-
-function SearchSideBarPrices(props) {
-  let reducer = props.reducerTypes
-  let dispatch = props.dispatch
-  let filters = props.filters
-
-  const handleFilterSwitch = (filter1) => {
-    dispatch({ type: "FILTER", id: filter1.id });
-  };
-
-  let priceFilters = filters.filter(filter1 => filter1.type === 'price')
-  //console.log("PRICE FILTERS")
-  //console.log(filters)
-  return(
-    <>
-    <div className='d-flex flex-column justify-content-start align-items-start'>
-    <h5>Prices</h5>
-
-    {priceFilters.map((filter1) =>
-      <div key={`${filter1.id}`} className="form-check ms-3">
-            <input className="form-check-input" type="checkbox" value="underFifty" checked={filter1.filter} onChange={() => handleFilterSwitch(filter1)} id="flexCheckDefault"/>
-              <label className="form-check-label" htmlFor="flexCheckDefault">
-              {`${filter1.title}`}
-              </label>
-            </div>
-)}
-
-
-          </div>
-
-    </>
-  )
-}
-
-function TopFilterDropdown(props) {
-
-  return(
-    <>
-    <div className='d-flex flex-column justify-content-center align-items-end'>
-
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle m-1 mt-3 px-2 py-1 d-flex flex-fill" type="button" id="sortBy" data-bs-toggle="dropdown" aria-expanded="false">
-            Sort By
-          </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-           <li><a class="dropdown-item" href="#">Price High to Low</a></li>
-           <li><a class="dropdown-item" href="#">Price Low to High</a></li>
-         </ul>
-      </div>
-          </div>
-
-    </>
-  )
-}
 
