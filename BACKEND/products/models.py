@@ -1,5 +1,7 @@
 from django.db import models
 
+from smartnotes.settings import MEDIA_URL, STATIC_URL, MEDIA_ROOT
+
 # inventory
 # available for pick up: 8/22/23
 # this product: made 3, 4, 5, 3, 3, 2 
@@ -16,10 +18,11 @@ class Products(models.Model):
     id = models.BigAutoField(primary_key=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     sale = models.BooleanField(False)
-    salesPercent = models.DecimalField(max_digits=4, decimal_places=2)  
+    #salesPercent = models.DecimalField(max_digits=4, decimal_places=2)  
     type = models.CharField(max_length=70)  
     season = models.CharField(max_length=70) 
     dateAdded = models.DateTimeField(auto_now_add=True)
+    pic = models.ImageField(upload_to = MEDIA_ROOT, height_field=None, width_field=None, max_length=100, default='product_image.jpg')
 
 
 class Sizes(models.Model):
