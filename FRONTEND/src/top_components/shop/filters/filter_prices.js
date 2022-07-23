@@ -14,35 +14,19 @@ const {Link, Route, Routes} = ReactRouterDOM
 
 export default function SearchSideBarPrices(props) {
 
-    const onChange = props.onChange
     const min = props.min
     const max = props.max
-    
     let reducer = props.reducerTypes
     let dispatch = props.dispatch
     let filters = props.filters
     
-    const handleFilterSwitch = (filter1) => {
+    const handleFilterSwitch = (min, max) => {
       dispatch({ type: "FILTER", id: filter1.id });
     };
     
+    
     let priceFilters = filters.filter(filter1 => filter1.type === 'price')
     
-    
-    function handlePriceInput(e) {
-      let minPrice = parseInt(priceInput[0].value),
-      maxPrice = parseInt(priceInput[1].value);
-      
-      if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
-          if(e.target.className === "input-min"){
-              rangeInput[0].value = minPrice;
-              range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
-          }else{
-              rangeInput[1].value = maxPrice;
-              range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-          }
-      }
-    }
     
       const [minVal, setMinVal] = useState(min);
       const [maxVal, setMaxVal] = useState(max);
@@ -79,8 +63,8 @@ export default function SearchSideBarPrices(props) {
     
       // Get min and max values when their state changes
       useEffect(() => {
-        onChange({ min: minVal, max: maxVal });
-      }, [minVal, maxVal, onChange]);
+        //onChange({ min: minVal, max: maxVal });
+      }, [minVal, maxVal]);
     
       
     

@@ -54,6 +54,8 @@ h3 {
   font-size: 2em;
   letter-spacing: .03em;
   text-transform: uppercase;
+  font-family: $fancy-font-family;
+  color: black;
   
 }
 h4 {
@@ -141,12 +143,35 @@ button {
   margin: 1.5rem;
 }
 
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+#navButton:active, #navButton:focus, #navButton:target, #navButton:visited, #navButton:focus-visible, #navButton:focus-within  {
+  border: none;
+  outline: none;
+}
+
+#navButton {
+  width: 2em;
+  height: 2em;
+  outline: none;
+}
+
 .icons {
   width: 2em;
   height: 2em;
 }
 
-.icons:hover {
+#burger_menu {
+  width: 1.5em;
+  height: 1.5em;
+  outline: none;
+
+}
+
+.icons:hover, #burger_menu {
   filter: brightness(160%);
   transform: scale(1.2, 1.2);
 }

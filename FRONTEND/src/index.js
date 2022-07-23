@@ -19,6 +19,7 @@ import ProductDetail from './top_components/shop/detail'
 import NotFound from './notfound'
 
 import shopping_cart_icon from './imgs/shopping_cart_icon.png'
+import burger_menu from './imgs/burger-md-menu.png'
 
 
 
@@ -182,21 +183,21 @@ function App(props) {
             <Link to='/' className={` px-2 justify-content-start navbar-branc nav-link m-0 ${props.isNavActive === 'homePage' ? 'activeNavPage' : ''}`}
                   onClick={e => handleActiveToggle('homePage')} id='homePage'><h3 id='fancy'>Hem's Goods</h3></Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
+      <img className="border-none" id='burger_menu' src={burger_menu} />
     </button>
 
 
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-column flex-sm-column flex-md-row flex-lg-row flex-xl-row flex-xxl-row align-items-start align-items-sm-start justify-content-md-end align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center justify-content-lg-end justify-content-xl-end justify-content-xxl-end">
+    <ul className="navbar-nav ms-auto mb-2 pe-5 mb-lg-0 d-flex flex-column flex-sm-column flex-md-row flex-lg-row flex-xl-row flex-xxl-row align-items-start align-items-sm-start justify-content-md-end align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center justify-content-lg-end justify-content-xl-end justify-content-xxl-end">
             
                
               
-              <li className='m-0 nav-item px-0' id='navContainer'>
+              <li className='m-0 me-4 nav-item px-0' id='navContainer'>
                   <Link to='/shop' className={`px-2 m-0 nav-page nav-link ${props.isNavActive === 'dashboardPage' ? 'activeNavPage' : ''}`}
                   onClick={e => handleActiveToggle('dashboardPage')} id='dashboardPage'>Shop</Link>
               </li>
-              <li>
-                <Link to='/about' className={`nav-page px-2 m-0 ${props.isNavActive === 'gameSchedulePage' ? 'activeNavPage' : ''}`}
+              <li className='m-0 nav-item me-4'>
+                <Link to='/about' className={` nav-page px-2 m-0 ${props.isNavActive === 'gameSchedulePage' ? 'activeNavPage' : ''}`}
                   onClick={e => handleActiveToggle('gameSchedulePage')} id='gameSchedulePage'>About</Link>
                </li>
               

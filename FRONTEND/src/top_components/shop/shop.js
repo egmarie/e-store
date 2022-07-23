@@ -67,7 +67,7 @@ const initialTypes = [
   },
   {
     id: 4,
-    title: "over250",
+    title: "pricerange",
     type: "price",
     filter: false, 
     min: 0,
@@ -78,6 +78,7 @@ const initialTypes = [
 const reducerTypes = (state, action) => {
   switch (action.type) {
     case "FILTER":
+
       return state.map((filter1) => {
         if (filter1.id === action.id) {
           return { ...filter1, filter: !filter1.filter };
@@ -85,6 +86,7 @@ const reducerTypes = (state, action) => {
           return filter1;
             }
           });
+
         default:
       return state;
     }
@@ -204,7 +206,7 @@ const [sortSizes, setSortSizes] = useState([
             //console.log("TOTAL")
             
             
-            
+      // TYPE TYPE TYPE
         } else if (trueTypeFilters.length > 0) {
         
             TF = data.filter(item => {
@@ -215,6 +217,7 @@ const [sortSizes, setSortSizes] = useState([
           console.log("TYPE")
           return typeFilter
       })
+      //PRICE PRICE PRICE
     } else if (truePriceFilters.length > 0) {
         TF = data.filter(item => {
           truePriceFilters.map(trueF => {

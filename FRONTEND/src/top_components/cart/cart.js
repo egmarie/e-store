@@ -97,7 +97,7 @@ useEffect(() => {
                     <h2>Order summary</h2>
                     <div className='border-bottom d-flex mt-4'>
                         <h6>Subtotal</h6>
-                        <h6 className='ms-auto'><b>{`$218`}</b></h6>
+                        <h6 className='ms-auto'><b>${`${cartTotal}`}</b></h6>
                     </div>
                     <div className='border-bottom d-flex mt-4'>
                         <h6>Estimated Total</h6>
